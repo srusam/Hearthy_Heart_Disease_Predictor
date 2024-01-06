@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style_index.css') }}"
+    />
+  </head>
+  <body>
+    <section>
+      <header>
+        <!-- nav bar start -->
+        <a href="#"
+          ><img class="logo" src="static/images/logo.png" alt="Logo"
+        /></a>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li>
+            <a href="{{ url_for('lipid_test') }}">Lipid Test Evaluation</a>
+          </li>
+          <li><a href="{{ url_for('main') }}">Heart Disease Predictor</a></li>
+          <li><a href="{{ url_for('upload') }}">ECG Analysis</a></li>
+        </ul>
+        <!-- nav bar end -->
+      </header>
+      <div class="content">
+        <div class="textBox">
+          <h2>Make your heart healthy<br />with <span>HEARTHY</span></h2>
+          <p>
+            Your heart does a lot for you. Now, it's your turn.<br />Take our
+            quick quiz now. Answer a few questions and we will help you improve
+            your lifestyle!
+          </p>
+          <a href="{{url_for('lifestyleSurvey')}}">Take Survey</a>
+          <a href="{{url_for('videoCall')}}">Find Consultant</a>
+        </div>
+
+        <div class="imgBox">
+          <div class="center-div"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

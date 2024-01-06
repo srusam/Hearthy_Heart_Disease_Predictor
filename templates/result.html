@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Heart Disease Predictor</title>
+		<link rel="shortcut icon" href="{{ url_for('static', filename='diabetes-favicon.ico') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+		<script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&family=Stylish&family=Tiro+Devanagari+Marathi&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-family: 'Stylish', serif;
+    font-family: 'Tiro Devanagari Marathi', serif;
+}
+
+section{
+    position:relative;
+    width: 100%;
+    /* min-height: 100vh; */
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+  
+
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header.logo{
+    position: relative;
+    max-width: 80px;
+}
+
+header ul{
+    position: relative;
+    display: flex;
+}
+
+header ul li{
+    list-style: none;
+}
+
+header ul li a{
+    display: inline-block;
+    color: #333;
+    font-weight: 400;
+    font-size: 18px;
+    margin-left: 40px;
+    text-decoration: none;
+}
+		</style>
+	</head>
+
+    <body>
+
+        <section>
+			<header>
+				<!-- nav bar start -->
+				<a href="#"><img class="logo" src="static/images/logo.png" alt="Logo"></a>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="{{ url_for('lipid_test') }}">Lipid Test Evaluation</a></li>
+					<li><a href="{{ url_for('main') }}">Heart Disease Predictor</a></li>
+					<li><a href="{{ url_for('upload') }}">ECG Analysis</a></li>
+				</ul>
+				<!-- nav bar end -->
+			</header>
+		</section>
+
+		<!-- Result -->
+		<div class="results">
+			{% if prediction==1 %}
+				<h1>Prediction: <span class='danger'>Oops! You have Chances of Heart Disease.</span></h1>
+				
+			{% elif prediction==0 %}
+				<h1>Prediction: <span class='safe'>Great! You DON'T chances have Heart Disease.</span></h1>
+				
+			{% endif %}
+		</div>
+ 
+        <div class="findHospital">
+            <button id="findCenterButton" onclick="findNearestCenter()">Find Nearest Hospital</button>
+            <script>
+                function findNearestCenter() {
+                    window.location.href = "{{ url_for('g_map')}}";
+                } 
+                document.getElementById('findCenterButton').addEventListener('click', findNearestCenter); 
+            </script>
+        </div>
+	</body>
+</html>

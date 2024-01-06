@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_lipid_test.css') }}">
+    <title>Lipid Test</title>
+  </head>
+  <script>
+    function Validate() {
+      var total_cholesterol = document.getElementsByClassName("cholesterol");
+      var ldl_cholesterol = document.getElementsByClassName("ldl_cholesterol");
+      var triglycerides = document.getElementsByClassName("triglycerides");
+      var vld_cholesterol = document.getElementsByClassName("vld_cholesterol");
+      var resultDisplay = document.querySelector(".test-results-content");
+      var hdl_cholesterol = document.getElementsByClassName("hdl_cholesterol");
+      console.log("Validate");
+
+      if (
+        total_cholesterol >= 200 ||
+        hdl_cholesterol <= 60 ||
+        ldl_cholesterol >= 100 ||
+        triglycerides >= 150
+      ) {
+        resultDisplay.textContent =
+          "Dear Patient, We have observed abnormalities in your lipid test so as next step you should go for Coronary Angiography / Echocardiography Cardiac / CT Scan / Stress Testing / Holter Monitoring any one the following Test.";
+        resultDisplay.style.display = "block"; // Display the content
+      } else {
+        resultDisplay.textContent =
+          "Congratulations! Your heart health is excellent! Your commitment to maintaining healthy cholesterol levels is commendable. Keep up the good work and continue adopting heart-healthy habits!";
+        resultDisplay.style.display = "block"; // Display the content
+      }
+    }
+  </script>
+  <body>
+    <section>
+      <header>
+        <!-- nav bar start -->
+        <a href="#"><img class="logo" src="static/images/logo.png" alt="Logo" /></a>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="{{ url_for('lipid_test') }}">Lipid Test Evaluation</a></li>
+          <li><a href="{{ url_for('main') }}">Heart Disease Predictor</a></li>
+          <li><a href="{{ url_for('upload') }}">ECG Analysis</a></li>
+        </ul>
+        <!-- nav bar end -->
+      </header>
+
+      <div class="main-content">
+        <div class="login-form">
+          <form onsubmit="event.preventDefault(); Validate();" class="form">
+            <h1 class="heading">LIPID TEST</h1>
+            <div class="contact-form-ele">
+              <label class="label">Total cholesterol</label>
+              <input type="number" class="email" class="cholesterol" placeholder="mg/dl" />
+            </div>
+
+            <div class="contact-form-ele">
+              <label class="label">LDL cholesterol</label>
+              <input
+                type="number"
+                name="ldl cholesterol"
+                class="password"
+                class="ldl_cholesterol"
+                placeholder="mg/dl"
+              />
+            </div>
+
+            <div class="contact-form-ele">
+              <label class="label">VLDL cholesterol</label>
+              <input
+                type="number"
+                name="vldl cholesterol"
+                class="password"
+                class="vld_cholesterol"
+                placeholder="mg/dl"
+              />
+            </div>
+
+            <div class="contact-form-ele">
+              <label class="label">HDL cholesterol</label>
+              <input
+                type="number"
+                name="hdl cholesterol"
+                class="password"
+                class="hdl_cholesterol"
+                placeholder="mg/dl"
+              />
+            </div>
+            <div class="contact-form-ele">
+              <label class="label">Triglycerides</label>
+              <input type="number" name="triglycerides" class="password"placeholder="mg/dl"  />
+            </div>
+
+            <div>
+              <input
+                type="submit"
+                class="login-submit-div"
+                value="Submit"
+                onclick="Validate()"
+              />
+            </div>
+            <p class="bottom-para">
+              Haven't Dont Test?
+              <span>
+                <a href="/register">Take test now</a>
+              </span>
+            </p>
+          </form>
+        </div>
+
+        <div class="test-results">
+
+          <p class="test-results-content" style="font-size: 30px; "></p>
+          <img src="" />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

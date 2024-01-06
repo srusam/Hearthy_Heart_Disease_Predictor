@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+  font-family: "Stylish", serif;
+  font-family: "Tiro Devanagari Marathi", serif;
+}
+
+header.logo {
+  position: relative;
+  max-width: 80px;
+}
+
+header ul {
+  position: relative;
+  display: flex;
+}
+
+header ul li {
+  list-style: none;
+}
+
+header ul li a {
+  display: inline-block;
+  color: #333;
+  font-weight: 400;
+  font-size: 18px;
+  margin-left: 40px;
+  text-decoration: none;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(165, 42, 42, 0.882);
+}
+
+.main-content {
+  padding: 15px;
+}
+
+.progress-bar-container {
+  height: 30px;
+  width: 400px;
+  border: 1px solid rgb(233, 29, 63);
+}
+
+.progress-bar {
+  background: linear-gradient(135deg, #03ee65, #e25017, #e62929);
+
+  width: 100%;
+  position: absolute;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(165, 42, 42, 0.882);
+  margin: 30px;
+  flex-wrap: wrap;
+  padding: 20px;
+  row-gap: 50px;
+
+}
+
+h3 {
+  color: rgba(165, 42, 42, 0.882);
+  font-size: 25px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.lifestyle-submit {
+  border: 1px solid #ccc;
+  width: 250px;
+  height: 40px;
+  margin-left: 188%;
+  margin-top: 10px;
+  padding: 8px 20px;
+  background: rgba(165, 42, 42, 0.882);
+  color: #fff;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  align-self: center;
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeStyle Results</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style_lifestyle_result.css') }}"
+    />
+  </head>
+  <script>
+                  const formData = {{ form_data | tojson | safe }};
+                      // Display data in console for demonstration
+                      console.log(formData);
+
+                      // const sleepHours = document.getElementById('sleep-result');
+                      // const exerciseFrequency = document.getElementById('exercise').value;
+                      // const dietInputs = document.querySelectorAll('input[name=diet]:checked');
+                      // const stressLevel = document.getElementById('stress-level').value;
+                      // const diabetes = document.getElementById('diabetes').value;
+                      // const heartDisease = document.getElementById('heart-disease').value;
+                      // const hypertension = document.getElementById('hypertension').value;
+                      // const smoking = document.getElementById('smoking').checked;
+                      // const physicalActivity = document.getElementById('physicalActivity').checked;
+                      // const chestPain = document.getElementById('chestPain').checked;
+                      // const heartAttack = document.getElementById('heartAttack').checked;
+                      // const shortnessOfBreath = document.getElementById('shortnessOfBreath').checked;
+
+                      console.log(formData.sleephours);
+
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                  var sleep_message = document.querySelector(".sleep_message");
+
+                  if(formData.diabetes==="yes"){
+                    var lipid_message = document.querySelector(".lipid_message");
+                    lipid_message.innerHTML = "According to your inputs. A lipid test is recommended to get more clarity. Take your Test from health center and analyze it";
+                    var lipid_button = document.querySelector(".lipid_button")
+                    lipid_button.style.display = "block";
+                  }
+
+                  if (formData.sleephours === "<6") {
+                    if (sleep_message) {
+                      sleep_message.innerHTML = "<li>Aim to increase sleep duration gradually, aiming for at least 7-9 hours per night</li><li>going to bed and waking up at the same time every day, even on weekends.</li>";
+                      sleep_message.style.color = "green";
+
+                    } else {
+                      console.error("Element with class 'sleep_message' not found.");
+                    }
+                  } else {
+                    sleep_message.innerHTML = ' You have a good sleep duration!' ;
+                    sleep_message.style.color = "red";
+                  }
+
+
+            //EXercise
+            var  excercise_message = document.querySelector(".excercise_message");
+                  if(formData.exercise==="daily"){
+                    excercise_message.innerHTML =" <li>Maintain regular exercise routines.</li>";
+                  }
+                  else if(formData.exercise==="weekly"){
+                    excercise_message.innerHTML = "<li> Ensure consistency in workouts </li>";
+
+                  }
+                  else if(formData.exercise==="rarely"){
+                    excercise_message.innerHTML = "<li>Start incorporating exercise gradually into your routine</li>";
+
+                  }
+        var alert_message = document.querySelector(".alert_message");
+                 if(formData.chestPain==="yes" || formData.heartAttack==="yes" || formData.shortnessOfBreath==="yes"){
+                    alert_message.innerHTML = "<strong>Alert!!</strong> You have reported symptoms related to heart problems. Please consult a doctor immediately."
+                    alert_message.style.color = "red";
+
+                    var lipid_message = document.querySelector(".lipid_message");
+                    lipid_message.innerHTML = "According to your inputs. A lipid test is recommended to get more clarity. Take your Test from health center and analyze it";
+                    var lipid_button = document.querySelector(".lipid_button")
+                    lipid_button.style.display = "block";
+                 }
+                 else{
+                  alert_message.innerHTML = "You Don't have any signs of Heart Disease!"
+                    alert_message.style.color = "green";
+                    var alert_img = document.querySelector(".alert_img");
+                    alert_img.src = "/static/images/good_health.jpeg";
+
+                 }
+    var stress_message = document.querySelector(".stress_message");
+    console.log(formData.stresslevel);
+    if(formData.stresslevel ==="low"){
+      stress_message.innerHTML = "<li>Your stress level is low, which is pretty good.</li> <li> Continue stress management practices.</li>"
+      stress_message.style.color = "green";
+    }
+    else if(formData.stresslevel ==="high" || formData.stresslevel === "medium"){
+      stress_message.innerHTML = "<li>Encourage a regular sleep schedule and good sleep hygiene</li> <li> Explore relaxation techniques, meditation, or seek professional help</li><li>spending time with supportive friends or family</li>"
+    }
+
+    var diet_message = document.querySelector(".diet_message");
+    if(formData.diet==="high_sugars_fats"){
+      diet_message.innerHTML = "<li>Your diet contains High sugar and fats! </br>Try to avoid it for good heart health.</li><li>Take green vegetables daily.</li>"
+      diet_message.style.color = "orange";
+    }
+    // else if(formData.diet ==="fruits" ){
+    //   stress_message.innerHTML = "<li>Encourage a regular sleep schedule and good sleep hygiene</li> <li> Explore relaxation techniques, meditation, or seek professional help</li><li>spending time with supportive friends or family</li>"
+    // }
+
+    });
+  </script>
+
+  <body>
+    <section>
+      <header>
+        <!-- nav bar start -->
+        <a href="#"
+          ><img class="logo" src="static/images/logo.png" alt="Logo"
+        /></a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Lipid Test Evaluation</a></li>
+          <li><a href="#">Heart Disease Predictor</a></li>
+          <li><a href="#">ECG Analysis</a></li>
+        </ul>
+        <!-- nav bar end -->
+      </header>
+      <h2
+        style="
+          margin-top: 170px;
+          margin-left: 40%;
+          color: rgba(165, 42, 42, 0.882);
+          font-family: Courier New, Courier, monospace;
+        "
+      >
+        Your Health Report
+      </h2>
+      <img
+        src="static/images/healthy_habits.jpeg"
+        style="height: 120px; margin-left: 40%"
+      />
+      <div class="main-content">
+        <div class="health-habits">
+          <h3>Sleep</h3>
+          <img
+            src="static/images/sleep.jpg"
+            style="width: 180px; height: 155px"
+            ;
+            class="sleep-img"
+          />
+
+          <!-- <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div> -->
+          <p class="sleep_message" style="font-size: 20px"></p>
+        </div>
+        <div style="margin-right: 100px">
+          <h3>Daily Excercise</h3>
+          <img src="static/images/excercise.jpeg" class="exerc-img" />
+          <p class="excercise_message" style="font-size: 20px"></p>
+        </div>
+        <div>
+          <h3>Stress Management</h3>
+          <img src="static/images/stress.jpeg" style="height: 180px" />
+          <p class="stress_message" style="font-size: 20px"></p>
+        </div>
+        <div style="margin-left: 30px">
+          <h3>Diet</h3>
+          <img
+            src="static/images/diet.jpeg"
+            style="width: 180px; height: 180px"
+            class="diet_img"
+          />
+          <p class="diet_message" style="font-size: 20px"></p>
+        </div>
+        <div>
+          <h3>Heart Disease Alert!</h3>
+          <img
+            src="static/images/worried_heart.jpg"
+            style="width: 180px; height: 180px"
+            class="alert_img"
+          />
+          <p class="alert_message" style="font-size: 20px"></p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 23px" class="lipid_message"></h3>
+          <a
+            href="{{ url_for('lipid_test') }}"
+            class="lipid_button"
+            style="
+              margin-top: -25px;
+              font-size: 23px;
+              display: none;
+              margin-left: 37%;
+            "
+            >HERE</a
+          >
+        </div>
+        <div>
+          <input
+            type="submit"
+            value="Find Health Center"
+            class="lifestyle-submit"
+            onclick="open()"
+            
+          />
+        </div>
+      </div>
+    </section>
+  </body>
+  <script>
+    function open(){
+      window.location.href="{{ url_for('g_map')}}";
+    }
+  </script>
+</html>

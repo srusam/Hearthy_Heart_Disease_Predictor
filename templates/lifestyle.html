@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LifeStyle Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_lifestyle.css') }}" />
+  </head>
+<script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission behavior
+
+      // Fetching values from form inputs
+      const sleepHours = document.getElementById('sleep-hours').value;
+      const exerciseFrequency = document.getElementById('exercise').value;
+      const dietInputs = document.querySelectorAll('input[name=diet]:checked');
+      const stressLevel = document.getElementById('stresslevel').value;
+      const diabetes = document.getElementById('diabetes').value;
+      const heartDisease = document.getElementById('heart-disease').value;
+      const hypertension = document.getElementById('hypertension').value;
+      const smoking = document.getElementById('smoking').checked;
+      const physicalActivity = document.getElementById('physicalActivity').checked;
+      const chestPain = document.getElementById('chestPain').checked;
+      const heartAttack = document.getElementById('heartAttack').checked;
+      const shortnessOfBreath = document.getElementById('shortnessOfBreath').checked;
+
+      // Generating report based on user inputs
+      let report = '<h2>Survey Report:</h2>';
+
+      // Assessing sleep hours
+      if (sleepHours === '<6') {
+        report += '<p>Your sleep duration is less than 6 hours. Consider getting adequate sleep for better health.</p>';
+      }
+
+      // Assessing other factors and generating alerts
+      if (chestPain || heartAttack || shortnessOfBreath) {
+        report += '<p><strong>Alert:</strong> You have reported symptoms related to heart problems. Please consult a doctor immediately.</p>';
+      }
+
+      // Generating suggestions based on inputs
+      if (exerciseFrequency === 'rarely' && physicalActivity) {
+        report += '<p>You report engaging in regular physical activity, which is good. However, consider increasing your exercise frequency for better health.</p>';
+      }
+
+      // Displaying the report
+      document.getElementById('report').innerHTML = report;
+    });
+</script>
+  <body>
+    <section>
+      <header>
+        <!-- nav bar start -->
+        <a href="#"><img class="logo" src="static/images/logo.png" alt="Logo" /></a>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#">Lipid Test Evaluation</a></li>
+          <li><a href="#">Heart Disease Predictor</a></li>
+          <li><a href="#">ECG Analysis</a></li>
+        </ul>
+        <!-- nav bar end -->
+      </header>
+    
+      <div style=" margin-top: 170px">
+    <h3 style="color:rgba(165, 42, 42, 0.882); font-size: 20px; margin-left: 43%;">Health Survey Form</h3>
+    <form action="{{ url_for('lifestyleResult')}}"  method="POST">
+      <fieldset style="border-radius: 13px;
+      border-color: rgba(165, 42, 42, 0.882);
+      padding: 24px;"> 
+       
+        <div class="box">
+          <label for="name" class="subheading" >Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="box">
+          <label for="age" class="subheading" >Age:</label>
+          <input type="number" id="age" name="age" min="1" required />
+        </div>
+
+        <div class="box">
+          <label class="subheading" for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="box">
+          <label for="email" class="subheading" >Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="box" >
+          <label for="phone" class="subheading" >Phone:</label>
+          <input
+            type="phone"
+            id="phone"
+            name="phone"
+            
+            required
+          />
+        </div>
+
+        <!-- Health Habits -->
+
+        <div class="box">
+          <h3 class="subheading" class="subheading" >Health Habits:</h3>
+          <label for="sleephours" class="internal-headings">Sleep Hours:</label>
+          <select id="sleephours" name="sleephours" required>
+            <option value="<6">Less than 6 hours</option>
+            <option value="6-8">6-8 hours</option>
+            <option value=">8">More than 8 hours</option>
+          </select>
+        </div>
+        <div class="box">
+          <label for="exercise" class="internal-headings" >Exercise Frequency:</label>
+          <select id="exercise" name="exercise" required>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="rarely">Rarely</option>
+          </select>
+        </div>
+        <div class="box">
+          <h2 class="subheading" class="internal-headings" >Your Daily diet Includes</h2>
+
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="balanced_healthy"
+            name="vegetables"
+            value="vegetables"
+          />
+
+          <label for="balanced_healthy" class="internal-headings" >Vegetables</label><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="processed_foods"
+            name="processed_foods"
+            value="processed_foods"
+          />
+          <label for="processed_foods" class="internal-headings" >Processed Food</label><br />
+
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="low_fruits_veggies"
+            name="fruits"
+            value="Fruits"
+          />
+          <label for="low_fruits_veggies" class="internal-headings" >Fruits</label><br />
+
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="high_sugars_fats"
+            name="diet"
+            value="high_sugars_fats"
+          />
+          <label for="high_sugars_fats" class="internal-headings" >High in sugars or fats</label><br />
+        </div>
+
+        <div class="box">
+          <label for="stresslevel" class="internal-headings" >Stress Level:</label>
+          <select id="stresslevel" name="stresslevel" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <!-- Health Conditions -->
+
+        <div class="box">
+          <h3 class="subheading" >Health Conditions:</h3>
+
+          <label for="diabetes" class="internal-headings" >Diabetes:</label>
+
+          <div class="box">
+            <select id="diabetes" name="diabetes" required>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="box">
+            <label for="heart-disease" class="internal-headings" >Heart Disease:</label>
+            <select id="heart-disease" name="heart-disease" required>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <label for="hypertension" class="internal-headings">Hypertension:</label>
+          <select id="hypertension" name="hypertension" required>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <!-- Additional Comments -->
+        <div class="box">
+          <h3 class="subheading" >Medical History:</h3>
+
+          <label for="heartDisease"
+            >Do you have a history of heart disease?</label
+            class="internal-headings" ></br>
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="heartDisease"
+            name="heartDisease"
+            value="yes"
+          />
+        </br>
+          <label for="familyHistory" class="internal-headings"
+            >Do you have a family history of heart disease or high
+            cholesterol? </label
+          ></br>
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="familyHistory"
+            name="familyHistory"
+            value="yes"
+          />
+      </br>
+    </br>
+          <label  class="internal-headings" for="diabetes" style="margin-left: -90px;
+          margin-top: 21px; 
+      ">Have you been diagnosed with diabetes?</label
+          ><br />
+          <input
+          style="margin-left: 90px;"
+          class="custom-checkbox"
+            type="checkbox"
+            id="diabetes"
+            name="diabetes"
+            value="yes"
+          /><br />
+        </div>
+
+        <div class="box">
+          <h3 class="subheading" >Lifestyle:</h3>
+          <label for="smoking" class="internal-headings" >Do you smoke?</label><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="smoking"
+            name="smoking"
+            value="yes"
+          /><br />
+
+          <label for="physicalActivity" class="checkbox-label" class="internal-headings"
+            >Do you engage in regular physical activity?</label
+          ><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="physicalActivity"
+            name="physicalActivity"
+            value="yes"
+          /><br />
+        </div>
+        <!-- Submit Button -->
+        <div class="box">
+          <h3 class="subheading" >Symptoms:</h3>
+          <label for="chestPain" class="internal-headings"
+            >Have you experienced chest pain or discomfort?</label
+          ><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="chestPain"
+            name="chestPain"
+            value="yes"
+          /><br />
+
+          <label for="heartAttack" class="internal-headings" >Have you had a heart attack or stroke?</label
+          ><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="heartAttack"
+            name="heartAttack"
+            value="yes"
+          /><br />
+
+          <label for="shortnessOfBreath"
+          class="internal-headings" > Do you experience shortness of breath?</label
+          ><br />
+          <input
+          class="custom-checkbox"
+            type="checkbox"
+            id="shortnessOfBreath"
+            name="shortnessOfBreath"
+            value="yes"
+          /><br />
+        </div>
+
+        <div class="box">
+          <input type="submit" value="Submit" class="lifestyle-submit"/>
+        </div>
+
+      </fieldset>
+    </form>
+</div>
+    <!-- <div class="help">
+      <p>
+        Forgot your password?
+        <a href="#"> Click here to reset it </a>
+      </p>
+    </div> -->
+  </section>
+  </body>
+</html>
